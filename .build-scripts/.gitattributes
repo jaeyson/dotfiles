@@ -1,0 +1,10 @@
+* text=auto
+
+*.sh eol=lf
+
+.alias eol=lf
+.*rc eol=lf
+.*profile eol=lf
+.zsh* eol=lf
+.bash* eol=lf
+.git* eol=lf
