@@ -7,17 +7,8 @@ stty -ixon
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
-
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -57,10 +48,6 @@ HIST_STAMPS="dd/mm/yyyy"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
   colored-man-pages
@@ -70,8 +57,6 @@ plugins=(
 autoload -U compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
-
-# User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -124,14 +109,19 @@ setopt HIST_BEEP
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+################
+#     ALIAS
+################
+alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# i.e. google how to cook
+alias google='f(){xdg-open "https://google.com/search?q=$*";unset -f f;};f'
+
+# check my IP
+alias my-ip=$( dig +short myip.opendns.com @resolver1.opendns.com )
+################
+#   END ALIAS
+################
 
 # Elixir - enable shell history
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -140,18 +130,11 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 . $HOME/.asdf/completions/asdf.bash
 
-# Opt out .NET telemetry
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-
 # node version manager (nvm)
 export NVM_DIR="$HOME/.nvm"
 export NVM_NODEJS_ORG_MIRROR="http://nodejs.org/dist/"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=~/.local/bin:$PATH
 
 # !!IMPORTANT!!
