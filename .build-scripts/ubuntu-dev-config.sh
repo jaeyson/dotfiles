@@ -3,13 +3,15 @@
 # change the dotfile repo here
 CONFIG_REPO=git@github.com:jaeyson/dotfiles.git
 
+# Get current dir
+DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 cd $HOME
 sudo apt update -y
 echo 'Installing git...'
 sudo apt install git curl wget zsh xdotool vim-gtk -y
 
-# Get current dir
-DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+echo "$DOTFILES_DIR" >> .gitignore
 
 # TODO: ZSH
 chsh -s $(which zsh)
@@ -31,6 +33,10 @@ echo "what about font ligature? Fira code and qterminal!"
 echo alias config='git --git-dir=$HOME/$DOTFILES_DIR/ --work-tree=$HOME' >> ~/.zshrc
 source $HOME/.zshrc
 
+# TODO: git sparse-checkout: avoid pulling README.md from remote
+# read here first: https://github.blog/2020-01-17-bring-your-monorepo-down-to-size-with-sparse-checkout/
+sed -i '2i\	sparsecheckout = true\' $DOTFILES_DIR/.config
+
 echo "Enter git user name"
 read GIT_USER;
 config config user.name "${GIT_USER}"
@@ -39,7 +45,7 @@ echo "Enter git user email"
 read GIT_EMAIL;
 config config user.email "${GIT_EMAIL}"
 
-git clone --bare $CONFIG_REPO $HOME/$DOTFILES_DIR
+git clone --bare $CONFIG_REPO $DOTFILES_DIR
 
 # make backups
 mkdir -p .config-backup && \
@@ -62,5 +68,4 @@ for f in ~/.build-scripts/*
 do
   cp "$DOTFILES_DIR/${f##*/}" ~
 done
-
 

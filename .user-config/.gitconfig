@@ -1,10 +1,7 @@
-[user]
-	useConfigOnly = true
 [core]
+	signingkey="1234"
 	editor = vi
 	ignorecase = true
-[status]
-	showUntrackedFiles = no
 [color]
 	ui = auto
 [color "branch"]
@@ -23,4 +20,6 @@
         untracked = red bold
 [diff]
 	compactionHeuristic = true
+[user]
+	useConfigOnly = true
 
