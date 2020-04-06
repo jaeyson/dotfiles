@@ -1,0 +1,18 @@
+keycode 66 = Mode_switch
+keysym h = h H Left
+keysym l = l L Right
+keysym k = k K Up
+keysym j = j J Down
+keysym q = q Q z
+keysym w = w W x
+keysym e = e E c
+keysym r = r R v
+keysym i = i I Insert
+keysym g = g G Home
+keysym b = b B End
+
+! u: Page Up, d: Page Down
+keysym u = u U Prior
+keysym d = d D Next
+
+keysym BackSpace = BackSpace BackSpace Delete
