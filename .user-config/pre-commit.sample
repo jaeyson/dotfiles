@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# in order to work, copy this to .git/hooks/ dir
+# remove .sample extension (pre-commit.sample to pre-commit)
+# then run chmod +x .git/hooks/pre-commit
+# test this with: git commit ...
+
+set -e
+mix format --check-formatted
+#mix test
+#mix credo --strict
+#mix dialyzer --halt-exit-status
+exit 0
