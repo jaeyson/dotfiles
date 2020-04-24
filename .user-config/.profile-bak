@@ -1,0 +1,40 @@
+# ~/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# exists.
+# see /usr/share/doc/bash/examples/startup-files for examples.
+# the files are located in the bash-doc package.
+
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+#umask 022
+
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# extend display to "HD"
+countDisplay = DISPLAY=:0 xrandr -q | grep ' connected' | wc -l
+if [ $countDisplay \> 1 ]; then
+  xrandr --newmode "hd" 138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
+  xrandr --addmode DP-2 "hd"
+  xrandr --output DP-2 --mode "hd"
+else
+  gnome-terminal -- /usr/bin/zsh -c 'echo "only one monitor connected"; read'
+fi
+
+xmodmap ~/.Xmodmap
+
