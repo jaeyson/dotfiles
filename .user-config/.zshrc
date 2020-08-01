@@ -118,7 +118,7 @@ alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias google='f(){xdg-open "https://google.com/search?q=$*";unset -f f;};f'
 
 # check my IP
-alias my-ip=$( dig +short myip.opendns.com @resolver1.opendns.com )
+alias my-ip='$( dig +short myip.opendns.com @resolver1.opendns.com )'
 ################
 #   END ALIAS
 ################
