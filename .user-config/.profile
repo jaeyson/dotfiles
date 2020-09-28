@@ -27,13 +27,16 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # extend display to "HD"
-countDisplay = DISPLAY=:0 xrandr -q | grep ' connected' | wc -l
-if [ $countDisplay \> 1 ]; then
-  xrandr --newmode "hd" 138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
-  xrandr --addmode DP-2 "hd"
-  xrandr --output DP-2 --mode "hd"
+COUNT_DISPLAY=$(xrandr | grep -w 'connected' | wc -l)
+
+if [ $COUNT_DISPLAY \> 1 ]; then
+  EXT_DISPLAY=$(xrandr | grep -w 'connected' | grep -vw 'primary' | grep -oE '[^ ]+')
+
+  xrandr --newmode "hd" $(cvt 1366 768 60 | grep 60 | grep -oE '[^"\S]*$')
+  xrandr --addmode $EXT_DISPLAY "hd"
+  xrandr --output $EXT_DISPLAY --mode "hd" --primary
 else
-  gnome-terminal -- /usr/bin/zsh -c 'echo "only one monitor connected"; read'
+  $SHELL -c 'echo "only one monitor connected"; read'
 fi
 
 xmodmap ~/.Xmodmap
